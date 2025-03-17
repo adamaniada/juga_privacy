@@ -16,28 +16,19 @@ class QuestionRepository extends ServiceEntityRepository
         parent::__construct($registry, Question::class);
     }
 
-    //    /**
-    //     * @return Question[] Returns an array of Question objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('q')
-    //            ->andWhere('q.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('q.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function findQuestionsGroupedByCategory()
+    {
+        $qb = $this->createQueryBuilder('q')
+            ->select('q.category', 'q')
+            ->orderBy('q.category');
 
-    //    public function findOneBySomeField($value): ?Question
-    //    {
-    //        return $this->createQueryBuilder('q')
-    //            ->andWhere('q.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        $questions = $qb->getQuery()->getResult();
+
+        $groupedQuestions = [];
+        foreach ($questions as $question) {
+            $groupedQuestions[$question['category']->value][] = $question;
+        }
+
+        return $groupedQuestions;
+    }
 }

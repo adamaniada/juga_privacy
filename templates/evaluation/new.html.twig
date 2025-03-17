@@ -1,0 +1,264 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Créer une Nouvelle Évaluation
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/css/evaluation_form.css') }}">
+    <style>
+        /* Styles Améliorés - Déplacés de l'inline vers un bloc plus organisé */
+        .evaluation-form-container {
+            background: linear-gradient(135deg, #f0f2f0 0%, #e0e0e0 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 2rem; /* Ajustement de l'espacement pour les petits écrans */
+            padding-bottom: 2rem;
+        }
+
+        .card-shadow-lg {
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+        }
+
+        .form-label.fw-bold {
+            color: #343a40;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-select-lg,
+        .form-control-lg {
+            padding: 0.8rem 1.5rem;
+            font-size: 1.1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ced4da;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        .form-select-lg:focus,
+        .form-control-lg:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+            outline: 0;
+        }
+
+        .text-danger.small {
+            font-style: italic;
+            display: block;
+            margin-top: 0.25rem;
+        }
+
+        .form-text.text-muted {
+            font-size: 0.9rem;
+            color: #6c757d !important;
+            display: block;
+            margin-top: 0.25rem;
+        }
+
+        .list-group-item {
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            padding: 1rem;
+            background-color: #fff;
+        }
+
+        .list-group-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .btn-success-lg {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: #fff;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        .btn-success-lg:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-outline-secondary-lg {
+            border-color: #6c757d;
+            color: #6c757d;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        .btn-outline-secondary-lg:hover {
+            background-color: #6c757d;
+            color: #fff;
+            border-color: #6c757d;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+
+        .card-footer.bg-light {
+            background-color: #f8f9fa !important;
+            border-top: 1px solid #dee2e6;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+
+        .question-category-title {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem; /* Marge augmentée pour une meilleure séparation */
+            text-align: center; /* Centrer le titre de la catégorie */
+        }
+
+        .category-icon {
+            font-size: 1.2rem; /* Icône de catégorie légèrement plus grande */
+            margin-right: 0.5rem;
+            color: #6610f2; /* Couleur différente pour les icônes de catégorie */
+        }
+
+        .question-icon {
+            font-size: 1rem;
+            margin-right: 0.5rem;
+            color: #dc3545; /* Couleur rouge pour les icônes de questions */
+        }
+
+        .list-group-item .form-group {
+            margin-bottom: 1rem; /* Ajout d'espacement entre les groupes de questions */
+        }
+
+        .evaluation-form-container .container {
+            max-width: 1200px; /* Limiter la largeur du conteneur pour une meilleure lisibilité sur les grands écrans */
+        }
+
+        .card {
+            border-radius: 0.75rem; /* Coins plus arrondis pour la carte */
+            overflow: hidden; /* Assurer que les coins arrondis s'appliquent aux éléments internes */
+        }
+
+        .card-header {
+            background-color: #e9ecef; /* En-tête de carte gris clair */
+            color: #495057;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #dee2e6;
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Assurer que les icônes dans les boutons sont alignées verticalement */
+        .btn i {
+            vertical-align: middle;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="evaluation-form-container py-5">
+        <div class="container">
+            <header class="mb-5 text-center">
+                <h1 class="display-3 text-success fw-bold">
+                    <i class="bi bi-clipboard-plus-fill me-3"></i> Commencer une Nouvelle Évaluation
+                </h1>
+                <p class="lead text-muted">
+                    Initiez une évaluation approfondie en fournissant les informations nécessaires et en répondant aux questions ci-dessous.
+                </p>
+            </header>
+
+            <div class="row justify-content-center">
+                <div class="col-xl-9 col-lg-11">
+                    <div class="card shadow-lg border-0 rounded-lg">
+                        <div class="card-header bg-white text-dark">
+                            <i class="bi bi-file-earmark-plus-fill me-2"></i> Configuration de l'Évaluation
+                        </div>
+                        <div class="card-body p-5">
+                            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+                            <div class="mb-4">
+                                {{ form_label(form.company, 'Sélectionner l\'Entreprise', {'label_attr': {'class': 'form-label fw-bold'}}) }}
+                                {{ form_widget(form.company, {'attr': {'class': 'form-select form-select-lg'}}) }}
+                                {{ form_errors(form.company, {'attr': {'class': 'text-danger small'}}) }}
+                            </div>
+
+                            <div class="mb-4">
+                                {{ form_label(form.evaluationDate, 'Définir la Date et l\'Heure de l\'Évaluation', {'label_attr': {'class': 'form-label fw-bold'}}) }}
+                                {{ form_widget(form.evaluationDate, {'attr': {'class': 'form-control form-control-lg'}}) }}
+                                {{ form_errors(form.evaluationDate, {'attr': {'class': 'text-danger small'}}) }}
+                                <small class="form-text text-muted">Spécifiez la date et l'heure exactes pour cette évaluation.</small>
+                            </div>
+
+                            <div class="mb-4">
+                                {{ form_label(form.overallScore, 'Entrer le Score Global Initial (Optionnel)', {'label_attr': {'class': 'form-label fw-bold'}}) }}
+                                {{ form_widget(form.overallScore, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Laisser vide pour un calcul automatique'}}) }}
+                                {{ form_errors(form.overallScore, {'attr': {'class': 'text-danger small'}}) }}
+                                <small class="form-text text-muted">Ce champ est optionnel ; le score peut être calculé automatiquement en fonction des réponses aux questions.</small>
+                            </div>
+
+                            <div class="mb-4">
+                                {{ form_label(form.status, 'Choisir le Statut de l\'Évaluation', {'label_attr': {'class': 'form-label fw-bold'}}) }}
+                                {{ form_widget(form.status, {'attr': {'class': 'form-select form-select-lg'}}) }}
+                                {{ form_errors(form.status, {'attr': {'class': 'text-danger small'}}) }}
+                                <small class="form-text text-muted">Indiquez le statut actuel de cette évaluation.</small>
+                            </div>
+
+                            <hr class="my-5">
+
+                            <div class="mb-5">
+                                <h2 class="text-center mb-4 text-primary question-category-title"><i class="bi bi-list-task me-2"></i> Questions d'Évaluation</h2>
+                                <p class="text-center text-muted mb-4">Répondez soigneusement aux questions suivantes, regroupées par catégorie, pour compléter l'évaluation.</p>
+                                {% for category, questions in questionsByCategory %}
+                                    <div class="mb-5">
+                                        <h3 class="mb-3 fw-semibold text-info"><i class="category-icon bi bi-folder-fill"></i> {{ category }}</h3>
+                                        <ul class="list-group">
+                                            {% for question in questions %}
+                                                <li class="list-group-item">
+                                                    <div class="form-group">
+                                                        <label class="form-label fw-bold"><i class="question-icon bi bi-question-circle-fill"></i> {{ question[0].text }}</label>
+                                                        <input type="text" class="form-control form-control-lg" placeholder="Entrez votre réponse ici" name="answers[{{ question[0].id }}][{{ category }}]">
+                                                    </div>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="d-grid gap-3 mt-5">
+                                <button type="submit" class="btn btn-success-lg rounded-pill">
+                                    <i class="bi bi-check-double me-2"></i> Soumettre l'Évaluation
+                                </button>
+                                <a href="{{ path('evaluation_index') }}" class="btn btn-outline-secondary-lg rounded-pill">
+                                    <i class="bi bi-arrow-left-circle-fill me-2"></i> Retour aux Évaluations
+                                </a>
+                            </div>
+
+                            {{ form_end(form) }}
+                        </div>
+                        <div class="card-footer bg-light py-3 text-muted text-center small">
+                            <i class="bi bi-info-circle-fill me-2 text-info"></i> Assurez-vous que toutes les réponses sont fournies et que les détails sont exacts avant de soumettre l'évaluation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        // JavaScript pour l'initialisation du sélecteur de date (si vous en utilisez un)
+        const evaluationDateInput = document.getElementById('evaluation_evaluationDate');
+        if (evaluationDateInput) {
+            // Exemple utilisant une bibliothèque de sélecteur de date hypothétique :
+            // $(evaluationDateInput).datetimepicker({ format: 'yyyy-mm-dd hh:ii' });
+            console.log('Champ de date d\'évaluation trouvé.');
+        }
+    </script>
+{% endblock %}

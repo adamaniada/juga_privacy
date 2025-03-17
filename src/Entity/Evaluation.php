@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Enum\EvaluationStatus;
 
 #[ORM\Entity(repositoryClass: "App\Repository\EvaluationRepository")]
 #[ORM\Table(name: 'evaluations')]
@@ -24,10 +25,10 @@ class Evaluation
     #[ORM\Column(type: 'float')]
     private float $overallScore;
 
-    #[ORM\Column(type: 'string', length: 50)]
-    private string $status;
+    #[ORM\Column(type: 'string', length: 50, enumType: EvaluationStatus::class)]
+    private EvaluationStatus $status;
 
-    public function getid(): ?int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -65,12 +66,12 @@ class Evaluation
         return $this;
     }
 
-    public function getStatus(): string
+    public function getStatus(): EvaluationStatus
     {
         return $this->status;
     }
 
-    public function setStatus(string $status): self
+    public function setStatus(EvaluationStatus $status): self
     {
         $this->status = $status;
         return $this;

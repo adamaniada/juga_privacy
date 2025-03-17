@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Edit Question
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/css/question_form.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="question-form-container py-5">
+        <div class="container">
+            <header class="mb-5 text-center">
+                <h1 class="display-4 text-warning">
+                    <i class="bi bi-pencil-fill me-3"></i> Edit Existing Question
+                </h1>
+                <p class="lead text-muted">
+                    Modify the details of this question to keep your content up-to-date.
+                </p>
+            </header>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card shadow-lg border-0 rounded-lg">
+                        <div class="card-body p-5">
+                            {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+                            <div class="mb-4">
+                                {{ form_label(form.text, 'Question Text', {'label_attr': {'class': 'form-label fw-bold'}}) }}
+                                {{ form_widget(form.text, {'attr': {'class': 'form-control form-control-lg rounded-pill', 'placeholder': 'Enter the updated question text...'}}) }}
+                                {{ form_errors(form.text, {'attr': {'class': 'text-danger small'}}) }}
+                            </div>
+
+                            <div class="mb-4">
+                                {{ form_label(form.category, 'Category', {'label_attr': {'class': 'form-label fw-bold'}}) }}
+                                {{ form_widget(form.category, {'attr': {'class': 'form-select form-select-lg rounded-pill'}}) }}
+                                {{ form_errors(form.category, {'attr': {'class': 'text-danger small'}}) }}
+                            </div>
+
+                            <div class="mb-4">
+                                {{ form_label(form.weight, 'Weight', {'label_attr': {'class': 'form-label fw-bold'}}) }}
+                                {{ form_widget(form.weight, {'attr': {'class': 'form-control form-control-lg rounded-pill', 'placeholder': 'Update the weight (e.g., 1-5)'}}) }}
+                                {{ form_errors(form.weight, {'attr': {'class': 'text-danger small'}}) }}
+                                <small class="form-text text-muted">Adjust the difficulty level as needed.</small>
+                            </div>
+
+                            <div class="d-grid gap-2 mt-4">
+                                <button type="submit" class="btn btn-warning btn-lg rounded-pill">
+                                    <i class="bi bi-save-fill me-2"></i> Update Question
+                                </button>
+                                <a href="{{ path('question_index') }}" class="btn btn-outline-secondary btn-lg rounded-pill">
+                                    <i class="bi bi-arrow-left me-2"></i> Back to Question List
+                                </a>
+                            </div>
+
+                            {{ form_end(form) }}
+                        </div>
+                        <div class="card-footer bg-light py-3 text-muted text-center small">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i> Double-check your changes before saving.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        // You can add custom JavaScript here if needed
+    </script>
+{% endblock %}

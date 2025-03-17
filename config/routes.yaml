@@ -8,38 +8,60 @@ welcome:
     path: /
     controller: App\Controller\WelcomeController::index
 
+# Explicit routes for SecurityController based on the provided code
+security:
+    resource: ../src/Controller/SecurityController.php
+    type: attribute
+
 home:
     path: /
     controller: App\Controller\WelcomeController::index
 
-# Example for a regulations list page
 regulations_list:
     path: /regulations
-    controller: App\Controller\WelcomeController::list
+    controller: App\Controller\RegulationController::list
 
-# Example for a specific regulation details page with a parameter
-regulation_details:
-    path: /regulations/{slug}
-    controller: App\Controller\WelcomeController::details
+# Explicit routes for QuestionController based on the provided code
+questions_list:
+    path: /question/
+    controller: App\Controller\QuestionController::list
+    methods: [GET]
 
-# Example for an assessments list page
-assessments_list:
-    path: /assessments
-    controller: App\Controller\WelcomeController::list
+question_new:
+    path: /question/new
+    controller: App\Controller\QuestionController::create
+    methods: [GET, POST]
 
-# Example for a reports page
-reports:
-    path: /reports
-    controller: App\Controller\WelcomeController::index
+question_edit:
+    path: /question/{id}/edit
+    controller: App\Controller\QuestionController::edit
+    methods: [GET, POST]
 
-# Example for a settings page
-settings:
-    path: /settings
-    controller: App\Controller\WelcomeController::index
+question_delete:
+    path: /question/{id}
+    controller: App\Controller\QuestionController::delete
+    methods: [POST]
 
-security:
-    resource: ../src/Controller/SecurityController.php
-    type: attribute
+# Explicit routes for EvaluationController based on the provided code
+evaluation_index:
+    path: /evaluation/
+    controller: App\Controller\EvaluationController::list
+    methods: [GET]
+
+evaluation_new:
+    path: /evaluation/new
+    controller: App\Controller\EvaluationController::create
+    methods: [GET, POST]
+
+evaluation_show:
+    path: /evaluation/new
+    controller: App\Controller\EvaluationController::show
+    methods: [GET, POST]
+
+evaluation_delete:
+    path: /evaluation/{id}
+    controller: App\Controller\EvaluationController::delete
+    methods: [POST]
 
 # Example route for user profile (you'll need to create this controller)
 profile:

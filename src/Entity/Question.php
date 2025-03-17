@@ -5,6 +5,22 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+enum QuestionCategory: string
+{
+    case Transparence = 'Transparence';
+    case Consentement = 'Consentement';
+    case SecuriteDesDonnees = 'Sécurité des Données';
+    case GestionDesDonnees = 'Gestion des Données';
+    case DroitsDesUtilisateurs = 'Droits des Utilisateurs';
+    case PartageEtTransfertDesDonnees = 'Partage et Transfert des Données';
+    case FormationEtSensibilisation = 'Formation et Sensibilisation';
+    case ConformiteEtAudit = 'Conformité et Audit';
+    case DelegueALaProtectionDesDonneesDPO = 'Délégué à la Protection des Données (DPO)';
+    case DocumentationEtPreuves = 'Documentation et Preuves';
+    case GestionDesRisques = 'Gestion des Risques';
+    case ResponsabiliteEtGouvernance = 'Responsabilité et Gouvernance';
+}
+
 #[ORM\Entity(repositoryClass: "App\Repository\QuestionRepository")]
 #[ORM\Table(name: 'questions')]
 class Question
@@ -17,8 +33,8 @@ class Question
     #[ORM\Column(type: 'text')]
     private string $text;
 
-    #[ORM\Column(type: 'string', length: 100)]
-    private string $category;
+    #[ORM\Column(type: 'string', enumType: QuestionCategory::class)]
+    private QuestionCategory $category;
 
     #[ORM\Column(type: 'integer')]
     private int $weight;
@@ -39,12 +55,12 @@ class Question
         return $this;
     }
 
-    public function getCategory(): string
+    public function getCategory(): QuestionCategory
     {
         return $this->category;
     }
 
-    public function setCategory(string $category): self
+    public function setCategory(QuestionCategory $category): self
     {
         $this->category = $category;
         return $this;

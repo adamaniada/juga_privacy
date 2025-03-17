@@ -1,0 +1,57 @@
+/* build/css/question_form.css */
+
+/* Vous pouvez ajouter des styles spécifiques au conteneur du formulaire si nécessaire */
+.question-form-container {
+    /* Par exemple, un arrière-plan subtil */
+    /* background-color: #f8f9fa; */
+}
+
+/* Personnalisation des labels (si vous voulez aller au-delà des classes Bootstrap) */
+.form-label.fw-bold {
+    color: #343a40; /* Assurez-vous que la couleur contraste bien */
+    margin-bottom: 0.5rem;
+}
+
+/* Personnalisation des inputs et selects (si nécessaire) */
+.form-control-lg.rounded-pill {
+    /* Vous pourriez ajouter une ombre plus subtile ici si vous le souhaitez */
+    /* box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.08); */
+}
+
+.form-select-lg.rounded-pill {
+    /* Même chose pour les selects */
+    /* box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.08); */
+}
+
+/* Style pour les messages d'erreur (déjà stylés avec Bootstrap, mais vous pouvez les modifier) */
+.text-danger.small {
+    font-style: italic;
+    margin-top: 0.25rem;
+}
+
+/* Style pour le texte d'aide (déjà stylé avec Bootstrap, mais personnalisable) */
+.form-text.text-muted {
+    font-size: 0.875em;
+}
+
+/* Vous pourriez ajouter des animations ou des transitions ici (facultatif) */
+/* .btn.rounded-pill {
+    transition: box-shadow 0.3s ease;
+}
+
+.btn.rounded-pill:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+} */
+
+/* Styles spécifiques pour le footer de la carte (si vous voulez les différencier davantage) */
+.card-footer.bg-light.text-muted.text-center.small {
+    border-top: 1px solid #eee;
+    padding: 1rem;
+    color: #6c757d;
+    font-size: 0.8em;
+}
+
+/* Si vous avez des éléments spécifiques dans votre formulaire que vous voulez cibler */
+/* #mon_element_specifique {
+    ...
+} */
