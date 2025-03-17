@@ -1,0 +1,81 @@
+{# templates\base.html.twig #}
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Outil de Conformité{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z'/><path fill-rule='evenodd' d='M8 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 1A6 6 0 1 1 8 2a6 6 0 0 1 0 12z'/><path d='M8 4a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5H8a.5.5 0 0 1-.5-.5V4.5A.5.5 0 0 1 8 4z'/><path d='M7.5 8a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5-.5H8a.5.5 0 0 1-.5-.5V8z'/></svg>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="{{ path('home') }}">
+                    <i class="bi bi-shield-check-fill text-primary me-2"></i>
+                    Outil de Conformité
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ path('home') }}">Tableau de Bord</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('regulations_list') }}">Réglementations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('assessments_list') }}">Évaluations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('reports') }}">Rapports</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('settings') }}">Paramètres</a>
+                        </li>
+                        {% if app.user %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle me-1"></i> {{ app.user.userIdentifier }}
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" href="{{ path('profile') }}">Profil</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-4">
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer class="bg-light py-3 mt-5 text-center text-muted border-top">
+        <div class="container">
+            <p>&copy; {{ "now"|date("Y") }} Outil de Conformité. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</body>
+</html>

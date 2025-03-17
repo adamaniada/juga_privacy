@@ -1,0 +1,66 @@
+{# templates/security/login.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion Sécurisée - Outil de Conformité{% endblock %}
+
+{% block body %}
+    <div class="bg-light py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card shadow-lg border-0 rounded-lg">
+                        <div class="card-header bg-primary text-white">
+                            <h3 class="text-center font-weight-light my-3"><i class="bi bi-shield-lock-fill me-2"></i> Accès Sécurisé</h3>
+                        </div>
+                        <div class="card-body p-4">
+                            <form method="post">
+                                {% if error %}
+                                    <div class="alert alert-danger fade show" role="alert">
+                                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endif %}
+
+                                {% if app.user %}
+                                    <div class="alert alert-info fade show" role="alert">
+                                        <i class="bi bi-info-circle-fill me-2"></i> Vous êtes déjà connecté en tant que {{ app.user.userIdentifier }}. <a href="{{ path('app_logout') }}" class="alert-link">Se déconnecter</a>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% else %}
+                                    <div class="mb-3">
+                                        <label for="inputEmail" class="form-label"><i class="bi bi-envelope-fill me-1"></i> Adresse Email</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control form-control-lg" autocomplete="email" required autofocus placeholder="Votre adresse email">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="inputPassword" class="form-label"><i class="bi bi-key-fill me-1"></i> Mot de Passe</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                            <input type="password" name="password" id="inputPassword" class="form-control form-control-lg" autocomplete="current-password" required placeholder="Votre mot de passe">
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" value="remember-me" id="rememberMe" name="_remember_me">
+                                        <label class="form-check-label" for="rememberMe">
+                                            <i class="bi bi-check-square-fill me-1"></i> Se souvenir de moi
+                                        </label>
+                                    </div>
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                    <div class="d-grid">
+                                        <button class="btn btn-primary btn-lg shadow-sm" type="submit"><i class="bi bi-box-arrow-in-right me-2"></i> Connexion Sécurisée</button>
+                                    </div>
+                                {% endif %}
+                            </form>
+                        </div>
+                        <div class="card-footer text-center py-3">
+                            <div class="small"><a href="#" class="text-muted"><i class="bi bi-question-circle-fill me-1"></i> Mot de passe oublié ?</a></div>
+                            <div class="small"><a href="{{ path('app_register') }}" class="text-muted"><i class="bi bi-person-plus-fill me-1"></i> Créer un compte</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

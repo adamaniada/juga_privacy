@@ -1,0 +1,126 @@
+{# templates\registration\register.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un compte - Outil de Conformité{% endblock %}
+
+{% block body %}
+    <div class="min-vh-100 d-flex align-items-center justify-content-center bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+                        <div class="card-header bg-success text-white text-center py-4">
+                            <h3 class="fw-bold"><i class="bi bi-person-plus-fill me-2"></i> Créer un compte</h3>
+                        </div>
+                        <div class="card-body p-5">
+                            {% for label, messages in app.flashes %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+
+                            {{ form_start(registrationForm, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+                                <div class="form-floating mb-4">
+                                    {{ form_widget(registrationForm.name, {'attr': {'class': 'form-control', 'placeholder': 'Votre nom complet'}}) }}
+                                    {{ form_label(registrationForm.name, 'Nom complet') }}
+                                    {% if form_errors(registrationForm.name) %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form_errors(registrationForm.name) }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-floating mb-4">
+                                    {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Votre adresse email'}}) }}
+                                    {{ form_label(registrationForm.email, 'Adresse Email') }}
+                                    {% if form_errors(registrationForm.email) %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form_errors(registrationForm.email) }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-floating mb-4 position-relative">
+                                    {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Votre mot de passe'}}) }}
+                                    {{ form_label(registrationForm.plainPassword, 'Mot de Passe') }}
+                                    {% if form_errors(registrationForm.plainPassword) %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form_errors(registrationForm.plainPassword) }}
+                                        </div>
+                                    {% endif %}
+                                    <button type="button" class="btn btn-outline-secondary position-absolute end-0 top-50 translate-middle-y me-2" onclick="togglePassword()">
+                                        <i class="bi bi-eye-fill" id="togglePasswordIcon"></i>
+                                    </button>
+                                </div>
+
+                                <div class="form-floating mb-4">
+                                    {{ form_widget(registrationForm.companyName, {'attr': {'class': 'form-control', 'placeholder': 'Nom de l\'entreprise'}}) }}
+                                    {{ form_label(registrationForm.companyName, 'Nom de l\'entreprise') }}
+                                    {% if form_errors(registrationForm.companyName) %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form_errors(registrationForm.companyName) }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-floating mb-4">
+                                    {{ form_widget(registrationForm.companyAddress, {'attr': {'class': 'form-control', 'placeholder': 'Adresse de l\'entreprise'}}) }}
+                                    {{ form_label(registrationForm.companyAddress, 'Adresse de l\'entreprise') }}
+                                    {% if form_errors(registrationForm.companyAddress) %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form_errors(registrationForm.companyAddress) }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-floating mb-4">
+                                    {{ form_widget(registrationForm.companyContact, {'attr': {'class': 'form-control', 'placeholder': 'Contact de l\'entreprise'}}) }}
+                                    {{ form_label(registrationForm.companyContact, 'Contact de l\'entreprise') }}
+                                    {% if form_errors(registrationForm.companyContact) %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form_errors(registrationForm.companyContact) }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-floating mb-4">
+                                    {{ form_widget(registrationForm.companySector, {'attr': {'class': 'form-control', 'placeholder': 'Secteur de l\'entreprise'}}) }}
+                                    {{ form_label(registrationForm.companySector, 'Secteur de l\'entreprise') }}
+                                    {% if form_errors(registrationForm.companySector) %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ form_errors(registrationForm.companySector) }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <button type="submit" class="btn btn-success btn-lg shadow"><i class="bi bi-check-circle-fill me-2"></i> S'inscrire</button>
+                            {{ form_end(registrationForm) }}
+                        </div>
+                        <div class="card-footer text-center py-4 bg-white">
+                            <div class="small"><a href="{{ path('app_login') }}" class="text-primary text-decoration-none"><i class="bi bi-arrow-left-circle-fill me-1"></i> Retour à la connexion</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById("registration_form_plainPassword");
+            const toggleIcon = document.getElementById("togglePasswordIcon");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleIcon.classList.remove("bi-eye-fill");
+                toggleIcon.classList.add("bi-eye-slash-fill");
+            } else {
+                passwordInput.type = "password";
+                toggleIcon.classList.remove("bi-eye-slash-fill");
+                toggleIcon.classList.add("bi-eye-fill");
+            }
+        }
+    </script>
+{% endblock %}

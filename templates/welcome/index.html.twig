@@ -1,0 +1,88 @@
+{# templates/welcome/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de Bord - Outil de Conformité{% endblock %}
+
+{% block body %}
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-speedometer2 me-2"></i> Aperçu Général</h5>
+                    <p class="card-text">Bienvenue sur votre tableau de bord. Ici, vous pouvez avoir un aperçu de l'état de votre conformité, des tâches à venir et des améliorations nécessaires.</p>
+                    {# Add summary statistics or key performance indicators here #}
+                    <div class="row mt-3">
+                        <div class="col-sm-6">
+                            <div class="card bg-primary text-white shadow-sm">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2">Conformité Actuelle</h6>
+                                    <p class="card-text display-6">85%</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card bg-warning text-dark shadow-sm">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2">Évaluations en Cours</h6>
+                                    <p class="card-text display-6">3</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-bell-fill text-warning me-2"></i> Notifications Récentes</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Nouvelle Réglementation</div>
+                                La RGPD a été mise à jour.
+                            </div>
+                            <span class="badge bg-info rounded-pill">Nouveau</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Évaluation Due</div>
+                                L'évaluation PCI DSS expire bientôt.
+                            </div>
+                            <span class="badge bg-danger rounded-pill">Urgent</span>
+                        </li>
+                        {# Add more notifications here #}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-list-check me-2"></i> Dernières Évaluations</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Évaluation de la Sécurité des Données (Terminée) <span class="badge bg-success float-end">Passée</span></li>
+                        <li class="list-group-item">Conformité à la Loi X (En Cours) <span class="badge bg-warning float-end">En Cours</span></li>
+                        {# Add more recent evaluations #}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-gear-fill me-2"></i> Actions Rapides</h5>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="button"><i class="bi bi-plus-square me-2"></i> Démarrer une Nouvelle Évaluation</button>
+                        <button class="btn btn-outline-secondary" type="button"><i class="bi bi-file-earmark-plus me-2"></i> Ajouter une Réglementation</button>
+                        <button class="btn btn-outline-secondary" type="button"><i class="bi bi-file-earmark-arrow-down me-2"></i> Générer un Rapport</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

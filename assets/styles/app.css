@@ -1,0 +1,10 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+body {
+    background-color: lightgray;
+}
+
+.error {
+    color: red;
+    font-size: 0.875em;
+}

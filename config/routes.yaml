@@ -3,3 +3,52 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+welcome:
+    path: /
+    controller: App\Controller\WelcomeController::index
+
+home:
+    path: /
+    controller: App\Controller\WelcomeController::index
+
+# Example for a regulations list page
+regulations_list:
+    path: /regulations
+    controller: App\Controller\WelcomeController::list
+
+# Example for a specific regulation details page with a parameter
+regulation_details:
+    path: /regulations/{slug}
+    controller: App\Controller\WelcomeController::details
+
+# Example for an assessments list page
+assessments_list:
+    path: /assessments
+    controller: App\Controller\WelcomeController::list
+
+# Example for a reports page
+reports:
+    path: /reports
+    controller: App\Controller\WelcomeController::index
+
+# Example for a settings page
+settings:
+    path: /settings
+    controller: App\Controller\WelcomeController::index
+
+security:
+    resource: ../src/Controller/SecurityController.php
+    type: attribute
+
+# Example route for user profile (you'll need to create this controller)
+profile:
+    path: /profile
+    controller: App\Controller\WelcomeController::index
+    # You might want to add security requirements to this route
+    # requirements:
+    #     _security: is_granted('ROLE_USER')
+
+app_logout:
+    path: /logout
+    controller: App\Controller\WelcomeController::logout
